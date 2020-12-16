@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "hass.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "hass.name" . }}
+    chart: {{ template "hass.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "hass.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "hass.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      hostNetwork: true
+{{- if .Values.dnsPolicy }}
+      dnsPolicy: {{ .Values.dnsPolicy }}
+{{- end }}
+{{- if .Values.dnsConfig }}
+      dnsConfig:
+{{ toYaml .Values.dnsConfig | indent 8 }}
+{{- end }}
+{{- if .Values.initContainers }}
+      initContainers:
+{{- range $key, $value := .Values.initContainers }}
+        - name: {{ $key }}
+{{ toYaml $value | indent 10 }}
+{{- end }}
+{{- end }}
+      containers:
+      - name: hass
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        env:
+        - name: TZ
+          value: {{ .Values.timezone }}
+        resources:
+          limits:
+            memory: "1Gi"
+          requests:
+            memory: "512Mi"
+        ports:
+        - containerPort: 8123
+        volumeMounts:
+        - mountPath: /config
+          name: config-volume
+        securityContext:
+          privileged: true
+      volumes:
+      - name: config-volume
+        hostPath:
+          path: {{ .Values.mountPath }}
+          type: Directory

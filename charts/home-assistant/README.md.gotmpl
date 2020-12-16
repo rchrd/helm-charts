@@ -1,0 +1,22 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
+## About the chart
+
+This installation of Home Assistant uses a volume mount on the host to store persistent data.
+
+## Basic usage example
+
+```
+helm repo add rchrd https://TODO
+
+helm template homeassistant rchrd/home-assistant --set dnsNames={hass.mydomain.com} --set mountPath=/data/homeassistant
+```
+
+## Configuration
+
+The following table lists the configurable parameters of the chart and the default values.
+
+{{ template "chart.valuesSection" . }}
