@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  homeassistant:
+  - apiVersion: v2
+    appVersion: 2020.12.1
+    created: "2020-12-29T15:23:54.962197827Z"
+    description: Home Assistant - Open source home automation that puts local control and privacy first.
+    digest: 83bf9a9ab953730af3521ea03199e3b75c78531abaae9889789e8aafa54b5471
+    icon: https://en.wikipedia.org/wiki/File:Home_Assistant_Logo.svg
+    name: homeassistant
+    urls:
+    - https://github.com/rchrd/helm-charts/releases/download/homeassistant-0.0.1/homeassistant-0.0.1.tgz
+    version: 0.0.1
+generated: "2020-12-29T15:23:54.605792344Z"
