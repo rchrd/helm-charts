@@ -12,11 +12,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Run chart-testing (lint)
+      - name: Set up chart-testing
         uses: helm/chart-testing-action@master
-        with:
-          command: lint
-          config: .github/ct.yaml
+      - name: Run chart-testing (lint)
+        env:
+          CT_DEBUG: true
+          CT_CHECK-VERSION-INCREMENT: true
+        run: ct lint
 
   lint-docs:
     runs-on: ubuntu-20.04

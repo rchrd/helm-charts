@@ -23,5 +23,5 @@ service:
 # -- (list) List of DNS names the ingress should respond to
 dnsNames:
 
-# -- Path were the persistent data is stored on the host
-mountPath: /data
+# -- Path were the persistent data is stored on the host (must exist before deployment)
+mountPath: /tmp
