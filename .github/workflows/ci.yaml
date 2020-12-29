@@ -8,18 +8,22 @@ on:
 jobs:
 
   lint-chart:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Run chart-testing (lint)
+      - name: Set up chart-testing
         uses: helm/chart-testing-action@master
-        with:
-          command: lint
-          config: .github/ct.yaml
+      - name: Run chart-testing (lint)
+        env:
+          CT_CHECK_VERSION_INCREMENT: false
+          CT_DEBUG: true
+          CT_TARGET_BRANCH: main
+          CT_VALIDATE_MAINTAINERS: false
+        run: ct lint
 
   lint-docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: lint-chart
     steps:
       - name: Checkout
@@ -28,15 +32,13 @@ jobs:
         run: .github/helm-docs.sh
 
   kubeval-chart:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - lint-chart
       - lint-docs
     strategy:
       matrix:
         k8s:
-          - v1.17.16
-          - v1.18.14
           - v1.19.6
           - v1.20.1
     steps:
@@ -49,7 +51,7 @@ jobs:
 
   install-chart:
     name: install-chart
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - lint-chart
       - lint-docs
@@ -57,8 +59,6 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.17.11
-          - v1.18.8
           - v1.19.4
           - v1.20.0
     steps:
@@ -68,8 +68,11 @@ jobs:
         uses: helm/kind-action@master
         with:
           node_image: kindest/node:${{ matrix.k8s }}
-      - name: Run chart-testing (install)
+      - name: Set up chart-testing
         uses: helm/chart-testing-action@master
-        with:
-          command: install
-          config: .github/ct.yaml
+      - name: Run chart-testing (install)
+        env:
+          CT_DEBUG: true
+          CT_TARGET_BRANCH: main
+        run: ct install
+
