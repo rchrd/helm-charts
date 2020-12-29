@@ -16,6 +16,7 @@ jobs:
         uses: helm/chart-testing-action@master
       - name: Run chart-testing (lint)
         env:
+          CT_TARGET_BRANCH: main
           CT_DEBUG: true
           CT_CHECK-VERSION-INCREMENT: true
         run: ct lint
