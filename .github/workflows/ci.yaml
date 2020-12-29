@@ -8,7 +8,7 @@ on:
 jobs:
 
   lint-chart:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -19,7 +19,7 @@ jobs:
           config: .github/ct.yaml
 
   lint-docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: lint-chart
     steps:
       - name: Checkout
@@ -28,7 +28,7 @@ jobs:
         run: .github/helm-docs.sh
 
   kubeval-chart:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - lint-chart
       - lint-docs
@@ -49,7 +49,7 @@ jobs:
 
   install-chart:
     name: install-chart
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - lint-chart
       - lint-docs
@@ -68,8 +68,7 @@ jobs:
         uses: helm/kind-action@master
         with:
           node_image: kindest/node:${{ matrix.k8s }}
-      - name: Run chart-testing (install)
+      - name: Set up chart-testing
         uses: helm/chart-testing-action@master
-        with:
-          command: install
-          config: .github/ct.yaml
+      - name: Run chart-testing (install)
+        run: ct install
