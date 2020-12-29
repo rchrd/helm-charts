@@ -16,11 +16,10 @@ jobs:
         uses: helm/chart-testing-action@master
       - name: Run chart-testing (lint)
         env:
-          CT_CONFIG: .github/ct.yaml
-          # CT_TARGET_BRANCH: main
-          # CT_DEBUG: true
-          # CT_CHECK_VERSION_INCREMENT: false
-          # CT_VALIDATE_MAINTAINERS: false
+          CT_CHECK_VERSION_INCREMENT: false
+          CT_DEBUG: true
+          CT_TARGET_BRANCH: main
+          CT_VALIDATE_MAINTAINERS: false
         run: ct lint
 
   lint-docs:
@@ -73,5 +72,8 @@ jobs:
         uses: helm/chart-testing-action@master
       - name: Run chart-testing (install)
         env:
-          CT_CONFIG: .github/ct.yaml
+          CT_DEBUG: true
+          CT_HELM_EXTRA_ARGS: "--timeout 600 --set dnsNames={hass.mydomain.com}"
+          CT_TARGET_BRANCH: main
         run: ct install
+
