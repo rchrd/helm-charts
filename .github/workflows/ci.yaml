@@ -18,7 +18,7 @@ jobs:
         env:
           CT_TARGET_BRANCH: main
           CT_DEBUG: true
-          CT_CHECK-VERSION-INCREMENT: false
+          CT_CHECK_VERSION_INCREMENT: false
           CT_VALIDATE_MAINTAINERS: false
         run: ct lint
 
