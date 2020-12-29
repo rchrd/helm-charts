@@ -73,7 +73,6 @@ jobs:
       - name: Run chart-testing (install)
         env:
           CT_DEBUG: true
-          CT_HELM_EXTRA_ARGS: "--set dnsNames={hass.mydomain.com}"
           CT_TARGET_BRANCH: main
         run: ct install
 
