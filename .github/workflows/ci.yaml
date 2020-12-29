@@ -16,10 +16,11 @@ jobs:
         uses: helm/chart-testing-action@master
       - name: Run chart-testing (lint)
         env:
-          CT_TARGET_BRANCH: main
-          CT_DEBUG: true
-          CT_CHECK_VERSION_INCREMENT: false
-          CT_VALIDATE_MAINTAINERS: false
+          CT_CONFIG: .github/ct.yaml
+          # CT_TARGET_BRANCH: main
+          # CT_DEBUG: true
+          # CT_CHECK_VERSION_INCREMENT: false
+          # CT_VALIDATE_MAINTAINERS: false
         run: ct lint
 
   lint-docs:
@@ -39,8 +40,6 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.17.16
-          - v1.18.14
           - v1.19.6
           - v1.20.1
     steps:
@@ -61,8 +60,6 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.17.11
-          - v1.18.8
           - v1.19.4
           - v1.20.0
     steps:
@@ -76,7 +73,5 @@ jobs:
         uses: helm/chart-testing-action@master
       - name: Run chart-testing (install)
         env:
-          CT_TARGET_BRANCH: main
-          CT_DEBUG: true
-          # CT_CHECK-VERSION-INCREMENT: true
+          CT_CONFIG: .github/ct.yaml
         run: ct install
