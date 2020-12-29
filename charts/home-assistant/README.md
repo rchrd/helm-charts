@@ -2,7 +2,7 @@
 
 Home Assistant - Open source home automation that puts local control and privacy first.
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 2020.12.0](https://img.shields.io/badge/AppVersion-2020.12.0-informational?style=flat-square)
+![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 2020.12.1](https://img.shields.io/badge/AppVersion-2020.12.1-informational?style=flat-square)
 
 ## About the chart
 
