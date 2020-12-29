@@ -2,5 +2,5 @@ apiVersion: v2
 name: homeassistant
 icon: https://en.wikipedia.org/wiki/File:Home_Assistant_Logo.svg
 description: Home Assistant - Open source home automation that puts local control and privacy first.
-version: 0.0.1
+version: 0.0.2
 appVersion: 2020.12.1

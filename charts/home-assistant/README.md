@@ -2,7 +2,7 @@
 
 Home Assistant - Open source home automation that puts local control and privacy first.
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 2020.12.1](https://img.shields.io/badge/AppVersion-2020.12.1-informational?style=flat-square)
+![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![AppVersion: 2020.12.1](https://img.shields.io/badge/AppVersion-2020.12.1-informational?style=flat-square)
 
 ## About the chart
 
@@ -30,7 +30,7 @@ The following table lists the configurable parameters of the chart and the defau
 | image.pullSecret | string | `nil` | Optional image pull secret |
 | image.repository | string | `"docker.io/homeassistant/home-assistant"` | Image to use |
 | image.tag | string | `"2020.12.1"` | Tag to use |
-| mountPath | string | `"/data"` | Path were the persistent data is stored on the host |
+| mountPath | string | `"/tmp"` | Path were the persistent data is stored on the host (must exist before deployment) |
 | replicaCount | int | `1` | Number of replicas to run |
 | service.port | int | `8123` | Service port |
 | service.type | string | `"ClusterIP"` | Service type |
