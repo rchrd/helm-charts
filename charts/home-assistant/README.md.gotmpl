@@ -10,10 +10,11 @@ This installation of Home Assistant uses a volume mount on the host to store per
 ## Basic usage example
 
 ```
-helm repo add rchrd https://rchrd.github.io/helm-charts/
-helm repo update
-
-helm template homeassistant rchrd/home-assistant --set dnsNames={hass.mydomain.com} --set mountPath=/data/homeassistant
+kubectl create ns homeassistant
+helm template homeassistant rchrd/home-assistant \
+  --namespace homeassistant \
+  --set dnsNames={hass.mydomain.com} \
+  --set mountPath=/data/homeassistant
 ```
 
 ## Configuration
