@@ -8,26 +8,30 @@ Home Assistant - Open source home automation that puts local control and privacy
 
 This installation of Home Assistant uses a volume mount on the host to store persistent data.
 
-## Example values file
+## Basic usage example
 
 ```
-dnsNames:
-- hass.mydomain.com
+helm repo add rchrd https://rchrd.github.io/helm-charts/
+helm repo update
 
-hostPath: /data/homeassistant
+helm template homeassistant rchrd/home-assistant --set dnsNames={hass.mydomain.com} --set mountPath=/data/homeassistant
 ```
+
+## Configuration
+
+The following table lists the configurable parameters of the chart and the default values.
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | dnsNames | list | `nil` | List of DNS names the ingress should respond to |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.pullSecret | string | `nil` |  |
-| image.repository | string | `"docker.io/homeassistant/home-assistant"` |  |
-| image.tag | string | `"2020.12.0"` |  |
+| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.pullSecret | string | `nil` | Optional image pull secret |
+| image.repository | string | `"docker.io/homeassistant/home-assistant"` | Image to use |
+| image.tag | string | `"2020.12.1"` | Tag to use |
 | mountPath | string | `"/data"` | Path were the persistent data is stored on the host |
 | replicaCount | int | `1` | Number of replicas to run |
-| service.port | int | `8123` |  |
-| service.type | string | `"ClusterIP"` |  |
+| service.port | int | `8123` | Service port |
+| service.type | string | `"ClusterIP"` | Service type |
 | timezone | string | `"Europe/Amsterdam"` | Timezone |

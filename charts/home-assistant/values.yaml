@@ -1,7 +1,11 @@
 image:
+  # -- Image to use
   repository: docker.io/homeassistant/home-assistant
-  tag: 2020.12.0
+  # -- Tag to use
+  tag: 2020.12.1
+  # -- Image pull policy
   pullPolicy: IfNotPresent
+  # -- (string) Optional image pull secret
   pullSecret:
 
 # -- Number of replicas to run
@@ -11,7 +15,9 @@ replicaCount: 1
 timezone: "Europe/Amsterdam"
 
 service:
+  # -- Service type
   type: ClusterIP
+  # -- Service port
   port: 8123
 
 # -- (list) List of DNS names the ingress should respond to
